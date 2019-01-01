@@ -54,7 +54,7 @@
               <span class="editor__number">3</span>
             </div>
 
-            <textarea class="editor__input">
+            <textarea id="css" class="editor__input">
 p {
   font-size:12px;
 }
@@ -72,7 +72,9 @@ p {
             <div class="editor__gutter">
               <span class="editor__number">1</span>
             </div>
-            <textarea class="editor__input">const name = 'xyz';</textarea>
+            <textarea class="editor__input" id="js">
+const name = 'xyz';</textarea
+            >
           </div>
         </div>
       </section>
@@ -86,4 +88,37 @@ p {
       </footer>
     </div>
   </body>
+  <script>
+    var doc = document.getElementById("preview").contentWindow.document;
+
+    var html = document.getElementById("html").value;
+    document.getElementById("html").addEventListener("change", e => {
+      doc.open();
+      doc.write(e.target.value);
+      doc.close();
+    });
+
+    document.getElementById("css").addEventListener("change", e => {
+      var head = doc.querySelector("head");
+      var style = head.querySelector("style");
+      if (!style) {
+        style = doc.createElement("style");
+        style.innerHTML = e.target.value;
+        head.appendChild(style);
+      } else {
+        style.innerHTML = e.target.value;
+      }
+    });
+
+    document.getElementById("js").addEventListener("change", e => {
+      var script = doc.querySelector("script");
+      if (!script) {
+        script = doc.createElement("script");
+        script.innerHTML = e.target.value;
+        doc.querySelector("body").appendChild(script);
+      } else {
+        script.innerHTML = e.target.value;
+      }
+    });
+  </script>
 </html>

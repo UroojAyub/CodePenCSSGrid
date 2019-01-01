@@ -7,7 +7,7 @@ html {
 }
 
 :root {
-    --grey:#343436;
+    --grey: #343436;
 }
 
 *,
@@ -44,13 +44,20 @@ h6 {
 
 .code {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, auto);
     background: #1b2b34;
+    width: 100%;
+
 }
 
 .editor {
     display: grid;
     grid-template-rows: auto 1fr;
+    resize: horizontal;
+    overflow: auto;
+    min-width: 50px; 
+    max-width: 100%;
+    width: 100%;
 }
 
 .editor__header {
